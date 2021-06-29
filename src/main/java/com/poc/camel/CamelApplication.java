@@ -9,10 +9,8 @@ import com.poc.camel.config.ContentBasedFileRouterConfig;
 public class CamelApplication {
 
     public static void main(final String[] args) {
-        // final ClassPathXmlApplicationContext applicationContext = new
-        // ClassPathXmlApplicationContext("camel-context.xml");
-        final AnnotationConfigApplicationContext applicationContext = new AnnotationConfigApplicationContext();
-        applicationContext.register(ContentBasedFileRouterConfig.class);
+        final AnnotationConfigApplicationContext applicationContext =
+            new AnnotationConfigApplicationContext(ContentBasedFileRouterConfig.class);
         try {
             Thread.sleep(5000);
         } catch (final InterruptedException e) {
