@@ -6,11 +6,15 @@
 
 	<camelContext
 		xmlns="http://camel.apache.org/schema/spring">
-		
+
 		<routeBuilder ref="contentBasedFileRouter" />
+		
+		<routeBuilder ref="messageTranslatorFileRouter" />
+		
+		<routeBuilder ref="multicastFileRouter" />
 
 		<route>
-		
+
 			<from uri="file://data/input" /> <!-- INPUT -->
 			<process ref="myFileProcessor" /> <!-- PROCESS -->
 			<to uri="file://data/outputUpperCase" /> <!-- OUTPUT -->
@@ -19,15 +23,21 @@
 				<simple>${body.toLowerCase()}</simple>
 			</transform>
 			<to uri="file://data/outputLowerCase" />
-			
+
 		</route>
 
 	</camelContext>
 
 	<bean id="myFileProcessor"
 		class="com.poc.camel.processor.FileProcessor" />
+
+	<bean id="contentBasedFileRouter"
+		class="com.poc.camel.processor.ContentBasedFileRouter" />
+
+	<bean id="messageTranslatorFileRouter"
+		class="com.poc.camel.processor.MessageTranslatorFileRouter" />
 		
-	<bean id="contentBasedFileRouter" 
-    class="com.poc.camel.processor.ContentBasedFileRouter" />
-		
+	 <bean id="multicastFileRouter"
+    class="com.poc.camel.processor.MulticastFileRouter" />
+
 </beans>

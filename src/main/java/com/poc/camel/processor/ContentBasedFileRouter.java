@@ -10,7 +10,7 @@ public class ContentBasedFileRouter extends RouteBuilder {
 
     @Override
     public void configure() throws Exception {
-        from("file://" + SOURCE_FOLDER + "?delete=true").choice()
+        from("file://" + SOURCE_FOLDER + "?delete=false").choice()
             .when(simple("${file:ext} == 'txt'"))
             .to("file://" + DESTINATION_FOLDER_TXT).otherwise()
             .to("file://" + DESTINATION_FOLDER_OTHER);
